@@ -21,11 +21,12 @@ router.post('/signup', async (req, res) => {
       password
     });
 
-    await user.save();
+    // Save user and wait for pre-save hook to hash password
+    const savedUser = await user.save();
 
     // Generate token
     const token = jwt.sign(
-      { userId: user._id },
+      { userId: savedUser._id },
       process.env.JWT_SECRET || 'your-secret-key',
       { expiresIn: '24h' }
     );
@@ -33,11 +34,11 @@ router.post('/signup', async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        bio: user.bio,
-        avatarUrl: user.avatarUrl
+        id: savedUser._id,
+        name: savedUser.name,
+        email: savedUser.email,
+        bio: savedUser.bio,
+        avatarUrl: savedUser.avatarUrl
       }
     });
   } catch (error) {

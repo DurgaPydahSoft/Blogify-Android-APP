@@ -16,7 +16,23 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  richContent: {
+    type: String,
+    default: null
+  },
+  categories: [{
+    type: String,
+    trim: true
+  }],
+  tags: [{
+    type: String,
+    trim: true
+  }],
   createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
     type: Date,
     default: Date.now
   },
@@ -26,7 +42,25 @@ const blogSchema = new mongoose.Schema({
     required: true
   },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  comments: [commentSchema]
+  comments: [commentSchema],
+  readCount: {
+    type: Number,
+    default: 0
+  },
+  isPublished: {
+    type: Boolean,
+    default: true
+  },
+  coverImage: {
+    type: String,
+    default: null
+  }
+});
+
+// Update the updatedAt field before saving
+blogSchema.pre('save', function(next) {
+  this.updatedAt = new Date();
+  next();
 });
 
 module.exports = mongoose.model('Blog', blogSchema); 

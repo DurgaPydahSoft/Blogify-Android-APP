@@ -19,12 +19,14 @@ const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const blogRoutes = require('./routes/blogs');
 const uploadRoutes = require('./routes/upload');
+const userRoutes = require('./routes/users');
 
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/users', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -33,10 +35,9 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0'; // Listen on all network interfaces
 
-app.listen(PORT, HOST, () => {
-  console.log(`Server is running on http://${HOST}:${PORT}`);
-  console.log('Local: http://localhost:3000');
-  console.log('Network: http://192.168.128.93:3000');
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Open in your browser: http://localhost:${PORT}`);
+  console.log(`Accessible on your network at: http://<YOUR-IP-ADDRESS>:${PORT}`);
 }); 

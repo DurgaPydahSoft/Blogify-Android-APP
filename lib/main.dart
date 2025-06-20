@@ -9,6 +9,10 @@ import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
+import 'screens/write_blog_screen.dart';
+import 'screens/view_blogs_screen.dart';
+import 'screens/blog_detail_screen.dart';
+import 'screens/dashboard_screen.dart';
 
 void main() {
   runApp(
@@ -41,6 +45,9 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignupScreen(),
         '/home': (context) => const HomeScreen(),
         '/profile': (context) => const ProfileScreen(),
+        '/write-blog': (context) => const WriteBlogScreen(),
+        '/view-blogs': (context) => const ViewBlogsScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
       },
     );
   }
